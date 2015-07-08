@@ -41,7 +41,7 @@ export default class InputValueStorage {
 
   static readValue(formContent, answersObject, fieldId) {
     const existingValueObject = JsUtil.flatFilter(answersObject, n => { return !_.isUndefined(n) && !_.isNull(n) && n.key === fieldId })
-    return !_.isEmpty(existingValueObject) ? existingValueObject[0].value : ""
+    return !_.isEmpty(existingValueObject) ? existingValueObject[0].value : undefined
   }
 
   static deleteValue(growingParent, answersObject, idOfFieldToRemove) {
