@@ -6,6 +6,7 @@ import ComponentFactory from '../form/ComponentFactory.js'
 import Translator from '../form/Translator.js'
 import LocalizedString from '../form/component/LocalizedString.jsx'
 import InputValueStorage from '../form/InputValueStorage.js'
+import {SyntaxValidator} from '../form/SyntaxValidator.js'
 import FormUtil from '../form/FormUtil.js'
 
 export class VaBudgetElement extends React.Component {
@@ -90,6 +91,12 @@ export class BudgetItemElement extends React.Component {
     const htmlId = this.props.htmlId
     const descriptionComponent = children[0]
     const amountComponent = children[1]
+    const amountValue = InputValueStorage.readValue(this.props.formContent, this.props.answersObject, amountComponent.props.field.id)
+    const amountIsValid = _.isUndefined(SyntaxValidator.validateMoney(amountValue))
+    console.log('vallue', amountValue, amountIsValid)
+    const descriptionField = descriptionComponent.props.field
+    descriptionField.required = amountIsValid
+    console.log('des0', descriptionField)
     return (
       <tr id={htmlId}>
         <td><LocalizedString translations={field} translationKey="label" lang={this.props.lang} /></td>

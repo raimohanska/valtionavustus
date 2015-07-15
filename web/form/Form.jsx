@@ -81,6 +81,7 @@ export default class Form extends React.Component {
                                  translations={translations}
                                  renderingParameters={renderingParameters}
                                  model={model}
+                                 formContent={fields}
                                  customProps={model.getCustomWrapperComponentProperties(state)}
                                  answersObject={values} />
       }
